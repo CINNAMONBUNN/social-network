@@ -4,7 +4,6 @@ import Users from './Users';
 
 
 const mapStateToProps = (state) => {
-    console.log(state.usersReducer)
     return {
         users: state.usersReducer.users
     }
