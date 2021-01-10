@@ -7,7 +7,7 @@ let Users = (props) => {
     let pages = []
 
     for (let i = 1; i <= pagesCount; i++) { pages.push(i) }
-
+    console.log(props)
     return (
         <div className="container flex">
             <h1>Users</h1>
@@ -15,7 +15,7 @@ let Users = (props) => {
                 {pages.map((page) => { return <button onClick={() => { props.changedPage(page) }} className={props.currentPage === page ? styles.selectedButton : styles.button}>{page}</button> })}
             </div>
             {
-                props.users.map((el) => <User key={el.id} name={el.name} info={el.info} />)
+                props.users.map((el) => <User id={el.id} key={el.id} name={el.name} info={el.info} photo={el.photos.small} />)
             }
         </div>
     )

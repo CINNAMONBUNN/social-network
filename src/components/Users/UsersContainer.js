@@ -10,6 +10,7 @@ class UsersContainer extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
             this.props.setTotalCount(response.data.totalCount)
+            console.log(response)
         })
     }
 
@@ -20,11 +21,11 @@ class UsersContainer extends React.Component {
         })
     }
     render() {
-        return <Users   totalCount={this.props.totalCount}
-                        currentPage={this.props.currentPage}
-                        changedPage={this.changedPage}
-                        users={this.props.users}
-                        pageSize={this.props.pageSize}
+        return <Users totalCount={this.props.totalCount}
+            currentPage={this.props.currentPage}
+            changedPage={this.changedPage}
+            users={this.props.users}
+            pageSize={this.props.pageSize}
         />
     }
 }
@@ -38,12 +39,10 @@ const mapStateToProps = (state) => {
         currentPage: state.usersReducer.currentPage
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setUsers: (users) => { dispatch(setUsersAC(users)) },
-        setCurrentPage: (currentPage) => { dispatch(setCurrentPageAC(currentPage)) },
-        setTotalCount: (totalCount) => { dispatch(setTotalCountAC(totalCount)) }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+                                        setUsers: setUsersAC,
+                                        setCurrentPage: setCurrentPageAC,
+                                        setTotalCount: setTotalCountAC
+                                        }
+)(UsersContainer)
